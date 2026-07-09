@@ -1,178 +1,215 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<meta name="theme-color" content="#0d0f14">
-<meta name="robots" content="noindex, nofollow, noarchive">
-<title>NGC · Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09090b"><meta name="robots" content="noindex, nofollow, noarchive">
+<title>NGC · Dashboard COO</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0d0f14;--surface:#141720;--surface2:#1c2030;--surface3:#232840;--border:#252a38;--text:#f0f2f8;--text2:#8892a4;--text3:#4a5568;--red:#ef4444;--red-bg:rgba(239,68,68,.12);--red-bd:rgba(239,68,68,.3);--green:#22c55e;--green-bg:rgba(34,197,94,.10);--green-bd:rgba(34,197,94,.3);--orange:#f59e0b;--orange-bg:rgba(245,158,11,.10);--orange-bd:rgba(245,158,11,.3);--blue:#60a5fa;--blue-bg:rgba(96,165,250,.10);--blue-bd:rgba(96,165,250,.3);--mono:'DM Mono',ui-monospace,monospace;--r:12px;--rs:8px;--rxs:6px}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden;background:var(--bg)}
-body{color:var(--text);font-family:'Inter',-apple-system,sans-serif;font-size:14px;display:flex;flex-direction:column;max-width:480px;margin:0 auto}
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 16px;height:54px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.logo{background:linear-gradient(135deg,#2563eb,#60a5fa);color:#fff;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
-.brand-name{font-weight:700;font-size:15px}.brand-sub{font-size:11px;color:var(--text2)}
-.live{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);font-family:var(--mono)}
-.dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:14px 14px 78px}
-.page{display:none}.page.on{display:block}
-.st{font-size:19px;font-weight:800;letter-spacing:-.3px}.ss{font-size:12px;color:var(--text2);margin:2px 0 14px}
-.alert{background:var(--red-bg);border:1px solid var(--red-bd);border-left:3px solid var(--red);border-radius:var(--rs);padding:10px 12px;margin-bottom:14px}
-.alert .h{font-size:12px;font-weight:700;color:var(--red)}.alert .b{font-size:11px;color:rgba(239,68,68,.85);margin-top:3px;line-height:1.4}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 12px;position:relative;overflow:hidden}
-.kpi::after{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.kpi.g::after{background:var(--green)}.kpi.r::after{background:var(--red)}.kpi.b::after{background:var(--blue)}.kpi.o::after{background:var(--orange)}
-.kpi .l{font-size:10px;font-weight:600;color:var(--text2);letter-spacing:.4px;text-transform:uppercase;margin-bottom:6px}
-.kpi .v{font-size:23px;font-weight:800;letter-spacing:-.5px;line-height:1;font-family:var(--mono)}
-.kpi.g .v{color:var(--green)}.kpi.r .v{color:var(--red)}.kpi.b .v{color:var(--blue)}.kpi.o .v{color:var(--orange)}
-.kpi .f{display:flex;justify-content:space-between;align-items:center;margin-top:7px}.kpi .vs{font-size:10px;color:var(--text3)}
-.tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px}
-.tag.g{background:var(--green-bg);color:var(--green)}.tag.r{background:var(--red-bg);color:var(--red)}.tag.b{background:var(--blue-bg);color:var(--blue)}.tag.o{background:var(--orange-bg);color:var(--orange)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:10px}
-.ct{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}.ct .s{font-size:10px;font-weight:400;color:var(--text2)}
-.chart{display:flex;align-items:flex-end;gap:6px;height:104px}
-.col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
-.bar{width:100%;border-radius:3px 3px 0 0;background:linear-gradient(180deg,#4ade80,#22c55e);min-height:3px;transition:height .7s cubic-bezier(.4,0,.2,1)}
-.cl{font-size:9px;color:var(--text3);font-family:var(--mono)}.cv{font-size:8px;color:var(--text2);font-family:var(--mono)}
-.wf{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--border)}.wf:last-child{border-bottom:none}
-.wf .n{font-size:11px;color:var(--text2);flex:1.1;line-height:1.3}.wf .w{flex:1;height:8px;background:var(--surface3);border-radius:4px;overflow:hidden}
-.wf .b2{height:100%;border-radius:4px}.wf .a{font-size:11px;font-weight:700;min-width:82px;text-align:right;font-family:var(--mono)}
-.wf.tot{background:var(--surface2);margin:6px -14px -14px;padding:11px 14px;border-radius:0 0 var(--r) var(--r)}
-.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}.row:last-child{border-bottom:none}
-.row .nm{flex:1;font-size:12px}.row .nm .s{font-size:10px;color:var(--text3);margin-top:1px}
-.pill{min-width:46px;height:26px;padding:0 8px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;font-family:var(--mono);flex-shrink:0}
-.pill.g{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}.pill.o{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-bd)}.pill.b{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd)}.pill.r{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
-.mbar{flex:1.4;height:8px;background:var(--surface3);border-radius:4px;overflow:hidden}.mbar>span{display:block;height:100%;border-radius:4px}
-.info{border-radius:var(--rxs);padding:10px 12px;font-size:11px;line-height:1.5;margin-top:6px}
-.info.b{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd)}.info.o{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-bd)}.info.g{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
-.hero{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);border-radius:var(--r);padding:16px;margin-bottom:12px;color:#fff}
-.hero .t{font-size:11px;opacity:.75;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
-.hero .v{font-size:30px;font-weight:800;letter-spacing:-1px;font-family:var(--mono)}.hero .s{font-size:11px;opacity:.75;margin-top:4px}
-.hg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.hi{background:rgba(255,255,255,.1);border-radius:var(--rxs);padding:10px}
-.hi .l{font-size:10px;opacity:.75;text-transform:uppercase}.hi .v{font-size:15px;font-weight:700;font-family:var(--mono);margin-top:2px}
-.camp{border:1px solid var(--border);border-radius:var(--rs);padding:12px;margin-bottom:8px;background:var(--surface2)}
-.camp .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.camp .nm{font-weight:700;font-size:13px}.camp .badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px}
-.camp .g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
-.camp .m{text-align:center}.camp .m .k{font-size:9px;color:var(--text3);text-transform:uppercase}.camp .m .val{font-size:14px;font-weight:800;font-family:var(--mono)}
-.task{display:flex;gap:9px;padding:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rxs);margin-bottom:6px}
-.task .bx{width:15px;height:15px;border-radius:3px;border:2px solid;flex-shrink:0;margin-top:1px}
-.task .bx.r{border-color:var(--red)}.task .bx.o{border-color:var(--orange)}.task .bx.b{border-color:var(--blue)}
-.task .tx{flex:1;font-size:12px;line-height:1.35}.task .cat{font-size:10px;color:var(--text3);margin-top:2px}
-.th{font-size:12px;font-weight:700;margin:16px 0 8px}
-.nav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:var(--surface);border-top:1px solid var(--border);display:flex;height:64px;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
-.nav b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--text3);cursor:pointer;font-weight:400}
-.nav b.on{color:var(--blue)}.nav .i{font-size:19px}.nav .t2{font-size:9px;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
-</style>
-</head>
-<body>
-<div class="topbar">
- <div style="display:flex;align-items:center;gap:10px"><div class="logo">NGC</div><div><div class="brand-name">Tienda NGC</div><div class="brand-sub">Dashboard · COO IA</div></div></div>
- <div class="live"><div class="dot"></div><span id="clock">--:--</span></div>
-</div>
-<div class="scroll">
- <div class="page on" id="p-resumen">
-  <div class="st">Resumen</div><div class="ss">Últimos 60 días · datos al 9 jul</div>
-  <div class="alert"><div class="h">2 acciones — reponer stock y revisar 1 campaña</div><div class="b">214 productos en cero (varios se venden). Campaña DESCUBRIMIENTO con ACOS 94% (casi no rinde).</div></div>
-  <div class="kpis"><div class="kpi g"><div class="l">Facturación 60d</div><div class="v">$23,3M</div><div class="f"><span class="vs">962 órdenes</span><span class="tag g">pagado</span></div></div>
-   <div class="kpi g"><div class="l">Margen Neto</div><div class="v">20,6%</div><div class="f"><span class="vs">$4,80M</span><span class="tag g">&gt; 15%</span></div></div></div>
-  <div class="kpis"><div class="kpi b"><div class="l">ROAS Publicidad</div><div class="v">4,03x</div><div class="f"><span class="vs">meta 4,0x</span><span class="tag g">OK</span></div></div>
-   <div class="kpi o"><div class="l">ACOS</div><div class="v">24,8%</div><div class="f"><span class="vs">meta 20%</span><span class="tag o">−5pt</span></div></div></div>
-  <div class="kpis"><div class="kpi b"><div class="l">Ticket Prom.</div><div class="v">$24.252</div><div class="f"><span class="vs">por orden</span><span class="tag b">ML+TN</span></div></div>
-   <div class="kpi r"><div class="l">Stock · Quiebres</div><div class="v">214</div><div class="f"><span class="vs">127 bajo · 95 ok</span><span class="tag r">crítico</span></div></div></div>
-  <div class="card"><div class="ct">Revenue por día <span class="s">últimos con ventas</span></div><div class="chart" id="chart"></div></div>
-  <div class="card"><div class="ct">Salud por canal <span class="s">margen neto (con ads)</span></div>
-   <div class="row"><div class="nm">Mercado Libre<div class="s">$21,97M · 923 órd · con ads</div></div><div class="mbar"><span style="width:34%;background:var(--orange)"></span></div><div class="pill o">18%</div></div>
-   <div class="row"><div class="nm">Tiendanube<div class="s">$1,36M · 39 órdenes</div></div><div class="mbar"><span style="width:100%;background:var(--green)"></span></div><div class="pill g">54%</div></div>
-   <div class="info b">ML es el volumen (96% de la venta) a 18% de margen después de publicidad. Tiendanube rinde 54% pero es chico.</div></div>
- </div>
+:root{--bg:#09090b;--panel:#0f0f13;--card:#15151b;--card2:#1b1b22;--bd:#262630;--tx:#ececf1;--mut:#8b8b97;--mag:#EC4899;--mag2:#F472B6;--ok:#22c55e;--bad:#ef4444;--ml:#EAB308;--meta:#3b82f6;--goog:#34A853;--tik:#2dd4bf;--vio:#7c3aed}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;font-size:14px}
+.app{display:flex;min-height:100vh}
+.side{width:210px;background:var(--panel);border-right:1px solid var(--bd);padding:16px 12px;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;margin-bottom:16px;padding:0 6px}
+.brand .dot{width:9px;height:9px;border-radius:3px;background:var(--mag)}
+.navg{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.8px;margin:13px 8px 5px}
+.navi{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;color:var(--mut);font-size:13.5px;cursor:pointer;user-select:none}
+.navi.on{background:rgba(236,72,153,.12);color:#fff}
+.navi:hover{background:rgba(255,255,255,.05)}
+.bn{font-size:9px;font-weight:800;background:var(--mag);color:#fff;padding:1px 6px;border-radius:10px;margin-left:auto}
+.trial{margin-top:13px;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.25);border-radius:9px;padding:9px 11px;font-size:11px;color:#d6b34a}
+.main{flex:1;min-width:0}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:14px 20px;background:rgba(9,9,11,.94);border-bottom:1px solid var(--bd)}
+.top h1{font-size:16px;font-weight:700}
+.chip{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--bd);border-radius:9px;padding:7px 11px;font-size:12.5px;color:var(--tx);white-space:nowrap;cursor:pointer;user-select:none}
+.chip:hover{border-color:var(--mag)}
+.chip.mag{background:var(--mag);border-color:var(--mag);color:#fff;font-weight:700}
+.hamb{display:none;font-size:20px;background:none;border:0;color:var(--tx);cursor:pointer}
+.banner{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:9px 20px;background:rgba(34,197,94,.06);border-bottom:1px solid var(--bd);font-size:12.5px;color:var(--mut)}
+.banner .bd{width:9px;height:9px;border-radius:50%;background:var(--ok);flex-shrink:0}
+.banner b{color:var(--tx)}.banner .sep{color:#3a3a44}
+.body{padding:18px 20px 48px}
+.view{display:none}.view.on{display:block}
+.sec{margin-top:22px}
+.sec-h{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.sec-h .t{font-size:16px;font-weight:700}
+.grid{display:grid;gap:13px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:13px;padding:15px 16px}
+.card .cl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mut)}
+.card .cl .d{width:12px;height:12px;border-radius:4px;flex-shrink:0}
+.card .cv{font-size:23px;font-weight:800;margin-top:7px;letter-spacing:-.5px}
+.card .cv.sm{font-size:19px}
+.card .cd{font-size:11.5px;margin-top:4px;font-weight:600}
+.up{color:var(--ok)}.dn{color:var(--bad)}.mut{color:var(--mut)}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:13px;padding:6px 4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:right;padding:11px 12px;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;border-bottom:1px solid var(--bd);cursor:pointer;user-select:none}
+thead th:hover{color:var(--tx)}
+thead th.srt::after{content:" \25BE";color:var(--mag)}thead th.srt.asc::after{content:" \25B4"}
+tbody tr{border-bottom:1px solid rgba(38,38,48,.5)}
+tbody tr:hover{background:rgba(236,72,153,.05)}
+.pill{font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px}
+.p-paid{background:rgba(34,197,94,.15);color:var(--ok)}.p-pend{background:rgba(234,179,8,.15);color:var(--ml)}.p-canc{background:rgba(239,68,68,.15);color:var(--bad)}
+.p-star{background:rgba(236,72,153,.15);color:var(--mag2)}.p-cow{background:rgba(34,197,94,.15);color:var(--ok)}.p-dog{background:rgba(239,68,68,.13);color:var(--bad)}
+.link{color:var(--mag2);font-weight:600;cursor:pointer}
+.toolbar{display:flex;align-items:center;gap:10px;padding:8px 10px}
+.inp{background:var(--card2);border:1px solid var(--bd);border-radius:8px;padding:8px 11px;color:var(--tx);font-size:12.5px;flex:1;max-width:260px}
+.btn{background:var(--card2);border:1px solid var(--bd);border-radius:8px;padding:8px 12px;color:var(--tx);font-size:12px;font-weight:600;cursor:pointer}
+.btn:hover{border-color:var(--mag)}
+.pag{display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:10px 12px;font-size:12px;color:var(--mut)}
+.pg{min-width:28px;height:28px;border:1px solid var(--bd);background:var(--card2);color:var(--tx);border-radius:7px;cursor:pointer;font-size:12px}
+.pg.on{background:var(--mag);border-color:var(--mag);color:#fff;font-weight:700}
+.chartbox{height:290px;position:relative;padding:8px 6px}
+.toggles{display:flex;gap:8px;flex-wrap:wrap;padding:10px 12px 0}
+.tg{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--tx);background:var(--card2);border:1px solid var(--bd);border-radius:8px;padding:5px 10px;cursor:pointer;user-select:none}
+.tg.off{opacity:.4}.tg .d{width:10px;height:10px;border-radius:3px}
+.act{background:var(--card);border:1px solid var(--bd);border-left:3px solid var(--mag);border-radius:0 12px 12px 0;padding:13px 15px;margin-bottom:10px}
+.act.r{border-left-color:var(--bad)}.act.w{border-left-color:var(--ml)}.act.g{border-left-color:var(--ok)}
+.act .ah{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px}
+.act .pr{font-size:9px;font-weight:800;padding:2px 7px;border-radius:10px;background:rgba(236,72,153,.15);color:var(--mag2);margin-left:auto}
+.act .ad{font-size:12.5px;color:var(--mut);margin-top:5px;line-height:1.5}
+.act .ai{font-size:12px;margin-top:7px;font-weight:700;color:var(--ok)}
+.wf{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;background:var(--card2);border:1px solid var(--bd);border-radius:11px;margin-bottom:7px;font-size:13px}
+.wf .v{font-weight:800}
+.loop{display:flex;gap:9px;align-items:flex-start;padding:10px 13px;background:var(--card2);border:1px solid var(--bd);border-radius:11px;margin-bottom:8px;font-size:12.5px;line-height:1.5}
+.loop .ar{color:var(--mag2);font-weight:800;flex-shrink:0}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--mag);color:var(--tx);padding:10px 16px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .25s;z-index:60;pointer-events:none}
+.toast.show{opacity:1}
+@media(max-width:860px){.side{position:fixed;left:-220px;top:0;z-index:50;transition:left .25s}.side.open{left:0}.hamb{display:inline-flex}.g4{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.top{padding:12px 14px}.body{padding:14px}.banner{padding:8px 14px}.hideM{display:none}.ovf{overflow-x:auto}th,td{padding:9px 8px;font-size:12px}}
 
- <div class="page" id="p-pl">
-  <div class="st">Rentabilidad</div><div class="ss">Cascada · últimos 60 días</div>
-  <div class="card"><div class="ct">De la venta al bolsillo</div>
-   <div class="wf"><div class="n">Facturación</div><div class="w"><div class="b2" style="width:100%;background:var(--blue)"></div></div><div class="a" style="color:var(--blue)">$23.330.539</div></div>
-   <div class="wf"><div class="n">− Costo productos</div><div class="w"><div class="b2" style="width:32%;background:var(--red)"></div></div><div class="a" style="color:var(--red)">−$7.442.429</div></div>
-   <div class="wf"><div class="n">− Comisiones ML+MP</div><div class="w"><div class="b2" style="width:33%;background:var(--red)"></div></div><div class="a" style="color:var(--red)">−$7.789.013</div></div>
-   <div class="wf"><div class="n">− Publicidad (ads)</div><div class="w"><div class="b2" style="width:14%;background:var(--orange)"></div></div><div class="a" style="color:var(--orange)">−$3.238.291</div></div>
-   <div class="wf"><div class="n">− Envíos (a cargo)</div><div class="w"><div class="b2" style="width:1%;background:var(--orange)"></div></div><div class="a" style="color:var(--orange)">−$65.799</div></div>
-   <div class="wf tot"><div class="n" style="color:var(--text);font-weight:700">= Margen Neto</div><div class="w"><div class="b2" style="width:21%;background:var(--green)"></div></div><div class="a" style="color:var(--green)">$4.795.007</div></div></div>
-  <div class="card"><div class="ct">Por canal</div>
-   <div class="row"><div class="nm">Mercado Libre<div class="s">rev $21,97M · ads $3,24M</div></div><div class="pill o">18%</div></div>
-   <div class="row"><div class="nm">Tiendanube<div class="s">rev $1,36M · sin ads</div></div><div class="pill g">54%</div></div>
-   <div class="info g">Ahora el margen está completo: incluye costos, comisiones, envíos y publicidad. Es el número real.</div></div>
- </div>
-
- <div class="page" id="p-mes">
-  <div class="st">Julio 2026</div><div class="ss">Mes en curso · al 9 jul</div>
-  <div class="hero"><div class="t">Facturación de julio</div><div class="v">$4.512.723</div><div class="s">196 órdenes · ticket $23.024</div>
-   <div class="hg"><div class="hi"><div class="l">Margen neto</div><div class="v">$881.578</div></div><div class="hi"><div class="l">Ads del mes</div><div class="v">$848.580</div></div></div></div>
-  <div class="card"><div class="ct">Mejores días</div>
-   <div class="row"><div class="nm">6 jul</div><div class="pill b">$838K</div></div>
-   <div class="row"><div class="nm">8 jul</div><div class="pill b">$774K</div></div>
-   <div class="row"><div class="nm">7 jul</div><div class="pill b">$381K</div></div></div>
- </div>
-
- <div class="page" id="p-ads">
-  <div class="st">Campañas</div><div class="ss">Mercado Libre Ads · 60 días</div>
-  <div class="kpis"><div class="kpi g"><div class="l">ROAS</div><div class="v">4,03x</div><div class="f"><span class="vs">$1 → $4</span><span class="tag g">bien</span></div></div>
-   <div class="kpi o"><div class="l">ACOS</div><div class="v">24,8%</div><div class="f"><span class="vs">de la venta</span><span class="tag o">meta 20%</span></div></div></div>
-  <div class="card"><div class="ct">Inversión vs retorno <span class="s">atribuido</span></div>
-   <div class="row"><div class="nm">Invertido en ads</div><div class="pill o">$3,24M</div></div>
-   <div class="row"><div class="nm">Ventas generadas</div><div class="pill g">$13,06M</div></div></div>
-  <div class="th">Por campaña <span style="font-weight:400;color:var(--text2);font-size:10px">· presupuesto y objetivo</span></div>
-  <div class="camp"><div class="top"><span class="nm">CRECIMIENTO</span><span class="badge" style="background:var(--green-bg);color:var(--green)">ACTIVA · escalar</span></div>
-   <div style="font-size:11px;color:var(--text2);margin-bottom:9px">Presupuesto <b style="color:var(--text);font-family:var(--mono)">$47.949</b>/día · objetivo ACOS 25% · ROAS 4x</div>
-   <div class="g"><div class="m"><div class="k">Invertido</div><div class="val" style="color:var(--orange)">$1,49M</div></div><div class="m"><div class="k">ROAS</div><div class="val" style="color:var(--green)">4,63x</div></div><div class="m"><div class="k">ACOS</div><div class="val">21,6%</div></div></div></div>
-  <div class="camp"><div class="top"><span class="nm">DEFENSA</span><span class="badge" style="background:var(--blue-bg);color:var(--blue)">ACTIVA</span></div>
-   <div style="font-size:11px;color:var(--text2);margin-bottom:9px">Presupuesto <b style="color:var(--text);font-family:var(--mono)">$49.429</b>/día · objetivo ACOS 25% · ROAS 4x</div>
-   <div class="g"><div class="m"><div class="k">Invertido</div><div class="val" style="color:var(--orange)">$1,72M</div></div><div class="m"><div class="k">ROAS</div><div class="val" style="color:var(--green)">3,57x</div></div><div class="m"><div class="k">ACOS</div><div class="val">28,0%</div></div></div></div>
-  <div class="camp"><div class="top"><span class="nm">DESCUBRIMIENTO</span><span class="badge" style="background:var(--surface3);color:var(--text2)">PAUSADA ✓</span></div>
-   <div style="font-size:11px;color:var(--text2);margin-bottom:9px">Presupuesto <b style="color:var(--text);font-family:var(--mono)">$2.500</b>/día · <span style="color:var(--green)">bien pausada</span></div>
-   <div class="g"><div class="m"><div class="k">Invertido 60d</div><div class="val" style="color:var(--orange)">$33K</div></div><div class="m"><div class="k">ROAS</div><div class="val" style="color:var(--red)">1,06x</div></div><div class="m"><div class="k">ACOS</div><div class="val" style="color:var(--red)">94%</div></div></div></div>
-  <div class="info b">Pausadas: DESCUBRIMIENTO, GORRAS ($9.225/día), TOPS ($6.384/día), BANDERAS ($6.062/día).</div>
- </div>
-
- <div class="page" id="p-tar">
-  <div class="st">Tareas</div><div class="ss">Priorizadas por impacto</div>
-  <div class="th" style="color:var(--red)">🔴 Reponer stock (se venden, en cero)</div>
-  <div id="tareas"></div>
-  <div class="th" style="color:var(--orange)">🟠 Optimizar</div>
-  <div class="task"><div class="bx o"></div><div class="tx">Escalar CRECIMIENTO (ROAS 4,63x)<div class="cat">Es tu mejor campaña</div></div></div>
-  <div class="task"><div class="bx o"></div><div class="tx">Bajar ACOS de DEFENSA (28%)<div class="cat">Está sobre la meta de 20%</div></div></div>
-  <div class="th" style="color:var(--blue)">🔵 Mejoras del sistema</div>
-  <div class="task"><div class="bx b"></div><div class="tx">Cargar costos faltantes de Tiendanube<div class="cat">Para margen TN exacto</div></div></div>
- </div>
-</div>
-<div class="nav">
- <b class="on" data-p="resumen"><div class="i">📊</div><div class="t2">Resumen</div></b>
- <b data-p="pl"><div class="i">💰</div><div class="t2">P&amp;L</div></b>
- <b data-p="mes"><div class="i">📅</div><div class="t2">Julio</div></b>
- <b data-p="ads"><div class="i">📣</div><div class="t2">Ads</div></b>
- <b data-p="tar"><div class="i">✅</div><div class="t2">Tareas</div></b>
-</div>
+.badge2{font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px}
+</style></head><body>
+<div class="app">
+ <aside class="side" id="side">
+  <div class="brand"><span class="dot"></span>NGC Analytics</div>
+  <div class="navg">Reportes</div>
+  <div class="navi on" data-view="dash">Dashboard</div>
+  <div class="navi" data-view="gan">Ganancia</div>
+  <div class="navi" data-view="ads">Publicidad <span class="bn">ADS</span></div>
+  <div class="navi" data-view="prod">Productos</div>
+  <div class="navi" data-view="inv">Inventario</div>
+  <div class="navi" data-view="dec">Decisiones <span class="bn">CEO</span></div>
+  <div class="navg">Pixel</div>
+  <div class="navi" data-soon>Meta</div><div class="navi" data-soon>Google Ads</div>
+  <div class="navg">Ajustes</div><div class="navi" data-soon>Integraciones</div><div class="navi" data-soon>Nubimetrics</div>
+  <div class="trial">Datos en vivo desde Supabase · ML, Mercado Pago, Tiendanube, Stock (Ecomm-App) y Publicidad · se actualiza cada hora</div>
+ </aside>
+ <div class="main">
+  <div class="top"><button class="hamb" id="hamb">&#9776;</button><h1 id="vtitle">Dashboard</h1><div style="flex:1"></div>
+   <div class="chip hideM" id="dateChip">Últimos 60 días</div><div class="chip" id="curChip">$ ARS &#9662;</div></div>
+  <div class="banner"><span class="bd"></span>Estado: <b>ATENCIÓN</b><span class="sep">·</span>Margen neto <b>20.6%</b><span class="sep">·</span>ROAS <b>4.03x</b> · ACOS <b>24.8%</b><span class="sep">·</span><b style="color:var(--bad)">2 alertas de publicidad</b><span class="sep">·</span><b style="color:var(--ml)">12 quiebres a reponer</b><span class="sep">·</span><span style="color:var(--mut)">datos al 2026-07-09 · stock 2026-07-09</span></div>
+  <div class="body">
+   <!-- DASHBOARD -->
+   <div class="view on" id="v-dash">
+    <div class="sec"><div class="sec-h"><span class="t">Métricas principales · 60 días</span></div>
+     <div class="grid g4">
+      <div class="card"><div class="cl">Facturación 60d</div><div class="cv sm"><span data-ars="23330539"></span></div><div class="cd mut">962 órdenes</div></div><div class="card"><div class="cl">Ganancia neta</div><div class="cv sm"><span data-ars="4795007"></span></div><div class="cd up">margen 20.6%</div></div><div class="card"><div class="cl">Publicidad</div><div class="cv sm"><span data-ars="3238291"></span></div><div class="cd up">ACOS 24.8%</div></div><div class="card"><div class="cl">Ticket promedio</div><div class="cv sm"><span data-ars="24252"></span></div><div class="cd mut">ML + TN</div></div><div class="card"><div class="cl">ROAS</div><div class="cv sm">4.03x</div><div class="cd up">meta 4x</div></div><div class="card"><div class="cl">Comisiones</div><div class="cv sm"><span data-ars="7789013"></span></div><div class="cd dn">33% s/venta</div></div><div class="card"><div class="cl">Costo productos</div><div class="cv sm"><span data-ars="7442429"></span></div><div class="cd mut">COGS</div></div><div class="card"><div class="cl">Stock quiebres</div><div class="cv sm">213</div><div class="cd dn">129 bajo</div></div>
+     </div></div>
+    <div class="sec"><div class="sec-h"><span class="d" style="width:12px;height:12px;border-radius:4px;background:var(--ml);display:inline-block"></span><span class="t">Mercado Libre</span></div>
+     <div class="grid g4"><div class="card"><div class="cl"><span class="d" style="background:var(--ml)"></span>Órdenes</div><div class="cv sm">923.0</div><div class="cd mut">en 60 días</div></div><div class="card"><div class="cl"><span class="d" style="background:var(--ml)"></span>Facturación</div><div class="cv sm"><span data-ars="21971420"></span></div><div class="cd up">94% del total</div></div><div class="card"><div class="cl"><span class="d" style="background:var(--ml)"></span>Publicidad</div><div class="cv sm"><span data-ars="3238291"></span></div><div class="cd dn">solo ML</div></div><div class="card"><div class="cl"><span class="d" style="background:var(--ml)"></span>Margen neto</div><div class="cv sm">18.5%</div><div class="cd up">con ads</div></div></div></div>
+    <div class="sec"><div class="sec-h"><span class="d" style="width:12px;height:12px;border-radius:4px;background:var(--mag);display:inline-block"></span><span class="t">Tiendanube</span></div>
+     <div class="grid g4"><div class="card"><div class="cl"><span class="d" style="background:var(--mag)"></span>Órdenes</div><div class="cv sm">39.0</div><div class="cd mut">en 60 días</div></div><div class="card"><div class="cl"><span class="d" style="background:var(--mag)"></span>Facturación</div><div class="cv sm"><span data-ars="1359119"></span></div><div class="cd up">6% del total</div></div><div class="card"><div class="cl"><span class="d" style="background:var(--mag)"></span>Comisiones</div><div class="cv sm"><span data-ars="21917"></span></div><div class="cd dn">4,5%</div></div><div class="card"><div class="cl"><span class="d" style="background:var(--mag)"></span>Margen neto</div><div class="cv sm">53.8%</div><div class="cd up">sin ads</div></div></div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Desglose de costos · 60 días</span></div>
+     <div class="panel"><div class="chartbox" style="height:250px"><canvas id="cCost"></canvas></div></div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Revenue y ganancia diaria</span></div>
+     <div class="panel"><div class="toggles">
+       <span class="tg" data-ds="0"><span class="d" style="background:var(--mag)"></span>Revenue</span>
+       <span class="tg" data-ds="1"><span class="d" style="background:#22c55e"></span>Ganancia</span></div>
+      <div class="chartbox"><canvas id="cMain"></canvas></div></div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Canales</span></div><div class="panel ovf"><table id="tCanales"></table></div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Últimas ventas</span></div>
+     <div class="panel"><div class="toolbar"><input class="inp" id="vf" placeholder="Filtrar por orden…"><div style="flex:1"></div></div>
+      <div class="ovf"><table id="tVentas"></table></div><div class="pag" id="vpag"></div></div></div>
+   </div>
+   <!-- GANANCIA -->
+   <div class="view" id="v-gan">
+    <div class="sec"><div class="sec-h"><span class="t">Ganancia neta</span></div>
+     <div class="grid g3">
+      <div class="card"><div class="cl">Hoy</div><div class="cv sm" data-ars="36844"></div><div class="cd mut">margen del día</div></div>
+      <div class="card"><div class="cl">Esta semana</div><div class="cv sm" data-ars="573567"></div><div class="cd mut">acumulado semanal</div></div>
+      <div class="card"><div class="cl">Este mes (julio)</div><div class="cv sm" data-ars="881578"></div><div class="cd up">margen 19.5%</div></div>
+     </div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Ganancia diaria · últimos 14 días</span></div><div class="panel"><div class="chartbox"><canvas id="cGanD"></canvas></div></div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Ganancia semanal</span></div><div class="panel"><div class="chartbox" style="height:230px"><canvas id="cGanS"></canvas></div></div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Ganancia mensual</span></div><div class="panel"><div class="chartbox" style="height:230px"><canvas id="cGanM"></canvas></div></div></div>
+   </div>
+   <!-- PUBLICIDAD -->
+   <div class="view" id="v-ads">
+    <div class="sec"><div class="sec-h"><span class="t">Alertas de sobrecosto en Ads</span></div><div class="act r"><div class="ah">&#9679; CRECIMIENTO<span class="pr">SOBRECOSTO</span></div><div class="ad">Gasto diario $50595 supera presupuesto $47949. Gasto 7d $354.166 · diario $50.595 · presupuesto $47.949. ACOS 29.0%</div><div class="ai">Revisar puja / presupuesto</div></div><div class="act r"><div class="ah">&#9679; DEFENSA<span class="pr">SOBRECOSTO</span></div><div class="ad">ACOS 48% (>30% umbral). Gasto 7d $409.368 · diario $58.481 · presupuesto $49.429. ACOS 48.4%</div><div class="ai">Revisar puja / presupuesto</div></div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Rendimiento · 60 días</span></div>
+     <div class="grid g4">
+      <div class="card"><div class="cl">ROAS</div><div class="cv sm up">4.03x</div><div class="cd up">$1 &#8594; $4.03</div></div>
+      <div class="card"><div class="cl">ACOS</div><div class="cv sm">24.8%</div><div class="cd mut">objetivo 20%</div></div>
+      <div class="card"><div class="cl">Invertido</div><div class="cv sm" data-ars="3238291"></div><div class="cd mut">en publicidad</div></div>
+      <div class="card"><div class="cl">Ventas generadas</div><div class="cv sm" data-ars="13056224"></div><div class="cd up">atribuido</div></div>
+     </div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Campañas</span></div><div class="panel ovf"><table id="tCamp"></table></div></div>
+   </div>
+   <!-- PRODUCTOS -->
+   <div class="view" id="v-prod">
+    <div class="sec"><div class="sec-h"><span class="d" style="width:12px;height:12px;border-radius:4px;background:var(--ml);display:inline-block"></span><span class="t">Más vendidos · Mercado Libre</span></div><div class="panel ovf"><table id="tTopML"></table></div></div>
+    <div class="sec"><div class="sec-h"><span class="d" style="width:12px;height:12px;border-radius:4px;background:var(--mag);display:inline-block"></span><span class="t">Más vendidos · Tiendanube</span></div><div class="panel ovf"><table id="tTopTN"></table></div></div>
+   </div>
+   <!-- INVENTARIO -->
+   <div class="view" id="v-inv">
+    <div class="sec"><div class="sec-h"><span class="t">Inventario</span></div>
+     <div class="grid g4">
+      <div class="card"><div class="cl">Sin stock</div><div class="cv sm" style="color:var(--bad)">213</div><div class="cd mut">productos en cero</div></div>
+      <div class="card"><div class="cl">Stock bajo</div><div class="cv sm" style="color:var(--ml)">129</div><div class="cd mut">1 a 5 unidades</div></div>
+      <div class="card"><div class="cl">Stock sano</div><div class="cv sm" style="color:var(--ok)">94</div><div class="cd mut">&gt; 5 unidades</div></div>
+      <div class="card"><div class="cl">Unidades totales</div><div class="cv sm">2.642</div><div class="cd mut">en depósito</div></div>
+     </div></div>
+    <div class="sec"><div class="sec-h"><span class="t">Reposición de la semana</span> <span class="badge2" style="background:rgba(239,68,68,.15);color:var(--bad)">12 urgentes</span></div>
+     <div class="panel ovf"><table id="tRepos"></table></div></div>
+   </div>
+   <!-- DECISIONES -->
+   <div class="view" id="v-dec">
+    <div class="sec"><div class="sec-h"><span class="t">Acciones priorizadas (automáticas)</span></div><div class="act r"><div class="ah">&#9679; Publicidad: CRECIMIENTO<span class="pr">ADS</span></div><div class="ad">Gasto diario $50595 supera presupuesto $47949.</div><div class="ai">Bajar puja o presupuesto para volver al objetivo</div></div><div class="act r"><div class="ah">&#9679; Publicidad: DEFENSA<span class="pr">ADS</span></div><div class="ad">ACOS 48% (>30% umbral).</div><div class="ai">Bajar puja o presupuesto para volver al objetivo</div></div><div class="act r"><div class="ah">&#9679; Reponer: Pañuelo Shemagh Sirio Kufiya Bufanda M<span class="pr">PRIORIDAD 1</span></div><div class="ad">Se vende 1.5 u/día, quedan 0 en stock (cobertura 0.0 días).</div><div class="ai">Generar orden de compra</div></div><div class="act r"><div class="ah">&#9679; Reponer: Gorra Táctica Militar Operador Ristop <span class="pr">PRIORIDAD 1</span></div><div class="ad">Se vende 1.14 u/día, quedan 0 en stock (cobertura 0.0 días).</div><div class="ai">Generar orden de compra</div></div><div class="act r"><div class="ah">&#9679; Reponer: Parche Pvc Bandera Argentina Táctica P<span class="pr">PRIORIDAD 1</span></div><div class="ad">Se vende 0.93 u/día, quedan 0 en stock (cobertura 0.0 días).</div><div class="ai">Generar orden de compra</div></div><div class="act r"><div class="ah">&#9679; Reponer: Parche Pvc Bandera Argentina Táctica P<span class="pr">PRIORIDAD 1</span></div><div class="ad">Se vende 0.5 u/día, quedan 0 en stock (cobertura 0.0 días).</div><div class="ai">Generar orden de compra</div></div><div class="act r"><div class="ah">&#9679; Reponer: Parche Bordado Avión Twin Otter Dhc-6 <span class="pr">PRIORIDAD 1</span></div><div class="ad">Se vende 0.36 u/día, quedan 0 en stock (cobertura 0.0 días).</div><div class="ai">Generar orden de compra</div></div></div>
+   </div>
+  </div></div></div>
+<div class="toast" id="toast"></div>
 <script>
-function clk(){var n=new Date();document.getElementById('clock').textContent=n.toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})+' ART';}
-clk();setInterval(clk,30000);
-document.querySelectorAll('.nav b').forEach(function(b){b.onclick=function(){
- document.querySelectorAll('.nav b').forEach(function(x){x.classList.remove('on')});
- document.querySelectorAll('.page').forEach(function(x){x.classList.remove('on')});
- b.classList.add('on');document.getElementById('p-'+b.dataset.p).classList.add('on');
- document.querySelector('.scroll').scrollTop=0;};});
-var dias=[['3 jul',371011],['4 jul',234082],['5 jul',329347],['6 jul',837986],['7 jul',380779],['8 jul',774233]];
-var mx=Math.max.apply(null,dias.map(function(d){return d[1]})),ch=document.getElementById('chart');
-dias.forEach(function(d,i){var c=document.createElement('div');c.className='col';
- c.innerHTML='<div class="cv">$'+Math.round(d[1]/1000)+'k</div><div class="bar" style="height:3px"></div><div class="cl">'+d[0]+'</div>';
- ch.appendChild(c);var bar=c.querySelector('.bar');setTimeout(function(){bar.style.height=Math.max(4,d[1]/mx*74)+'px';},150+i*80);});
-var q=[['Pañuelo Shemagh Sirio Kufiya',0,10],['Gorra Táctica Militar Operador',0,9],['Parche Bandera Argentina c/abrojo',0,7]];
-var tw=document.getElementById('tareas');
-q.forEach(function(x){var t=document.createElement('div');t.className='task';
- t.innerHTML='<div class="bx r"></div><div class="tx">Reponer: '+x[0]+'<div class="cat">Vendidas 45d: '+x[2]+' · Stock: '+x[1]+'</div></div>';tw.appendChild(t);});
-</script>
-</body>
-</html>
+var D={"canal": {"TN": {"revenue": 1359119.0, "ordenes": 39.0, "cogs": 540696.0, "comis": 21916.51, "ads": 0.0, "envios": 65799.0, "margen": 730707.49, "margen_pct": 53.8, "ticket": 34849}, "TOTAL": {"revenue": 23330538.77, "ordenes": 962.0, "cogs": 7442429.0, "comis": 7789013.3, "ads": 3238290.89, "envios": 65799.0, "margen": 4795006.58, "margen_pct": 20.6, "ticket": 24252}, "ML": {"revenue": 21971419.77, "ordenes": 923.0, "cogs": 6901733.0, "comis": 7767096.79, "ads": 3238290.89, "envios": 0.0, "margen": 4064299.09, "margen_pct": 18.5, "ticket": 23804}}, "ventas": [{"id": "2000017331549578", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-09", "tot": 9959}, {"id": "2000017331353928", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-09", "tot": 9959}, {"id": "2000017331056726", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-09", "tot": 19919}, {"id": "2000017331049242", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-09", "tot": 19919}, {"id": "2000017328296628", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-09", "tot": 9959}, {"id": "2000017328287196", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-09", "tot": 9959}, {"id": "2000017323457836", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-08", "tot": 39999}, {"id": "2000017321048834", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-08", "tot": 39999}, {"id": "2000017319428764", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-08", "tot": 9964}, {"id": "2014263357", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 5999}, {"id": "2014263357", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 29999}, {"id": "2014263357", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 11998}, {"id": "2014184277", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 29999}, {"id": "2014168308", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 13000}, {"id": "2014168308", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 6885}, {"id": "2014165542", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 6500}, {"id": "2014159850", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 6500}, {"id": "2014155775", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 6500}, {"id": "2014155775", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 5999}, {"id": "2000017316308394", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-08", "tot": 9959}, {"id": "2000017316312136", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-08", "tot": 9959}, {"id": "2000017316301118", "or": "Mercado Libre", "est": "paid", "fch": "2026-07-08", "tot": 9461}, {"id": "2014150257", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 6500}, {"id": "2014150257", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 5999}, {"id": "2014150257", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 5999}, {"id": "2014150257", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 10080}, {"id": "2014148664", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 11998}, {"id": "2014148664", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 6500}, {"id": "2014148664", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 5999}, {"id": "2014148664", "or": "Tiendanube", "est": "paid", "fch": "2026-07-08", "tot": 6500}], "top_ml": [{"sku": "XCPT97592", "nombre": "Pañuelo Shemagh Sirio Kufiya Bufanda Muj", "rev": 2877668, "un": 75, "costo": 11000, "margen": 71.0, "contrib": 2052668}, {"sku": "MRUB96405", "nombre": "Pañuelo Shemagh Sirio Kufiya Bufanda Muj", "rev": 1973364, "un": 52, "costo": 11000, "margen": 71.0, "contrib": 1401364}, {"sku": "OVRA95581", "nombre": "Pañuelo Shemagh Sirio Kufiya Bufanda Muj", "rev": 1771171, "un": 48, "costo": 11000, "margen": 70.0, "contrib": 1243171}, {"sku": "SJYP96405", "nombre": "Pañuelo Shemagh Sirio Kufiya Bufanda Muj", "rev": 969283, "un": 27, "costo": 11000, "margen": 69.0, "contrib": 672283}, {"sku": "WKSZ96728", "nombre": "Pañuelo Shemagh Sirio Kufiya Bufanda Muj", "rev": 919193, "un": 25, "costo": 11000, "margen": 70.0, "contrib": 644193}, {"sku": "MCWY06721", "nombre": "Gorra Táctica Militar Operador Ristop Aj", "rev": 874352, "un": 49, "costo": 4600, "margen": 74.0, "contrib": 648952}, {"sku": "CSAV95683", "nombre": "Parche Bordado Bandera Argentina Con Abr", "rev": 729393, "un": 74, "costo": 2500, "margen": 75.0, "contrib": 544393}, {"sku": "AS-123-V20", "nombre": "Campera Táctica Militar Impermeable Soft", "rev": 598500, "un": 4, "costo": 60500, "margen": 60.0, "contrib": 356500}], "top_tn": [{"sku": "ESCA001", "nombre": "Escarapela reglamentaria esmaltada con a", "rev": 76497, "un": 12, "costo": 3500, "margen": 45.0, "contrib": 34497}, {"sku": "AS-3-V1", "nombre": "Escudo Alado Metalico Superior Reglament", "rev": 62999, "un": 1, "costo": 34000, "margen": 46.0, "contrib": 28999}, {"sku": "AS-3-V2", "nombre": "Escudo Alado Metalico Superior Reglament", "rev": 62999, "un": 1, "costo": 34000, "margen": 46.0, "contrib": 28999}, {"sku": "AS-49-V4", "nombre": "Jerarquía Social De Invierno Faa X Par P", "rev": 53984, "un": 2, "costo": 5000, "margen": 81.0, "contrib": 43984}, {"sku": "PAR-6064MOFY42_0_v", "nombre": "Parche Bordado Avión Twin Otter Dhc-6 Fu", "rev": 53319, "un": 5, "costo": 3000, "margen": 72.0, "contrib": 38319}, {"sku": "91248853", "nombre": "BARRA METÁLICA REGLAMENTARIA FUERZA AÉRE", "rev": 47992, "un": 8, "costo": 3000, "margen": 50.0, "contrib": 23992}, {"sku": "AS-49-V1", "nombre": "Jerarquía Social De Invierno Faa X Par P", "rev": 47970, "un": 2, "costo": 5000, "margen": 79.0, "contrib": 37970}, {"sku": "RIE-1938MPK6K7_1_v", "nombre": "Riel Portabarras Militar Encastre Dual B", "rev": 45998, "un": 6, "costo": 3625, "margen": 53.0, "contrib": 24248}], "gan_dia": [["2026-06-26", 370918, -20835], ["2026-06-27", 189174, 18086], ["2026-06-28", 258293, 39437], ["2026-06-29", 238526, 16709], ["2026-06-30", 330926, 67151], ["2026-07-01", 440253, 78900], ["2026-07-02", 1065358, 229112], ["2026-07-03", 371011, 4604], ["2026-07-04", 234082, -48119], ["2026-07-05", 329347, 33646], ["2026-07-06", 837986, 182233], ["2026-07-07", 380779, 96019], ["2026-07-08", 774233, 268340], ["2026-07-09", 79674, 36844]], "gan_sem": [["2026-05-18", 2220024, 480799], ["2026-05-25", 1898683, 428474], ["2026-06-01", 3508259, 1026306], ["2026-06-08", 2692785, 518143], ["2026-06-15", 2960585, 607170], ["2026-06-22", 2304000, 364704], ["2026-06-29", 3009502, 382001], ["2026-07-06", 2072672, 583436]], "gan_mes": [["2026-04", 58997, 33324], ["2026-05", 6723739, 1279923], ["2026-06", 12035080, 2600181], ["2026-07", 4512723, 881578]], "repos": [{"sku": "XCPT97592", "nombre": "Pañuelo Shemagh Sirio Kufiya Bufanda M", "stock": 0, "vd": 1.5, "cob": 0.0, "sev": "urgente"}, {"sku": "MCWY06721", "nombre": "Gorra Táctica Militar Operador Ristop ", "stock": 0, "vd": 1.14, "cob": 0.0, "sev": "urgente"}, {"sku": "qwrl62663", "nombre": "Parche Pvc Bandera Argentina Táctica P", "stock": 0, "vd": 0.93, "cob": 0.0, "sev": "urgente"}, {"sku": "bhjk63113", "nombre": "Parche Pvc Bandera Argentina Táctica P", "stock": 0, "vd": 0.5, "cob": 0.0, "sev": "urgente"}, {"sku": "PAR-6064MOFY42_0_v", "nombre": "Parche Bordado Avión Twin Otter Dhc-6 ", "stock": 0, "vd": 0.36, "cob": 0.0, "sev": "urgente"}, {"sku": "OVRA95581", "nombre": "Pañuelo Shemagh Sirio Kufiya Bufanda M", "stock": 0, "vd": 0.36, "cob": 0.0, "sev": "urgente"}, {"sku": "MRUB96405", "nombre": "Pañuelo Shemagh Sirio Kufiya Bufanda M", "stock": 0, "vd": 0.29, "cob": 0.0, "sev": "urgente"}, {"sku": "FKXI09480", "nombre": "Escudos Parche Faa Malvinas 1982 PROBA", "stock": 0, "vd": 0.21, "cob": 0.0, "sev": "urgente"}, {"sku": "91248842", "nombre": "Parche Motivo Comando Operaciones Aére", "stock": 0, "vd": 0.21, "cob": 0.0, "sev": "urgente"}, {"sku": "DFCK89145", "nombre": "Parche Bordado Escudo Ngc Islas Malvin", "stock": 2, "vd": 1.36, "cob": 1.5, "sev": "urgente"}, {"sku": "ESCA001", "nombre": "ESCA001", "stock": 1, "vd": 0.64, "cob": 1.6, "sev": "urgente"}, {"sku": "CSAV95683", "nombre": "Parche Bordado Bandera Argentina Con A", "stock": 5, "vd": 1.36, "cob": 3.7, "sev": "urgente"}], "cost": [7442429, 7789013, 3238291, 65799, 4795007], "camp": [{"camp": "CRECIMIENTO", "spend": 1487027, "daily": 47949, "budget": 47949, "acos": 21.6}, {"camp": "DEFENSA", "spend": 1718377, "daily": 49429, "budget": 49429, "acos": 28.0}, {"camp": "DESCUBRIMIENTO (pausada)", "spend": 32887, "daily": 0, "budget": 2500, "acos": 94.0}]};
+(function(){
+ var cur='ARS',RATE=1250,REDRAWS=[];
+ function fmt(v){var n=cur==='USD'?v/RATE:v,s=cur==='USD'?'US$':'$',neg=n<0?'-':'';n=Math.abs(n);if(n>=1e6)return neg+s+(n/1e6).toFixed(2)+'M';if(n>=1e4)return neg+s+Math.round(n).toLocaleString('es-AR');return neg+s+n.toFixed(0);}
+ function paintMoney(){document.querySelectorAll('[data-ars]').forEach(function(e){e.textContent=fmt(+e.getAttribute('data-ars'));});}
+ function toast(t){var el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('show');},1500);}
+ function money(k){return function(r){return r[k]==null?'—':fmt(r[k]);};}
+ function table(elId,cols,rows,opt){opt=opt||{};var sortI=opt.sort==null?-1:opt.sort,asc=false,page=0,per=opt.per||0,filter='';var el=document.getElementById(elId);if(!el)return{setFilter:function(){}};function val(r,c){return c.v?c.v(r):r[c.k];}
+  function render(){var data=rows.slice();if(opt.filterKey&&filter)data=data.filter(function(r){return(''+r[opt.filterKey]).toLowerCase().indexOf(filter.toLowerCase())>=0;});if(sortI>=0){var c=cols[sortI];data.sort(function(x,y){var A=c.s?c.s(x):val(x,c),B=c.s?c.s(y):val(y,c);if(A==null)return 1;if(B==null)return -1;return(A>B?1:A<B?-1:0)*(asc?1:-1);});}var pages=per?Math.max(1,Math.ceil(data.length/per)):1;if(page>=pages)page=0;var show=per?data.slice(page*per,page*per+per):data;var h='<thead><tr>'+cols.map(function(c,i){return'<th class="'+(i===sortI?'srt'+(asc?' asc':''):'')+'" data-i="'+i+'">'+c.t+'</th>';}).join('')+'</tr></thead><tbody>';h+=show.map(function(r){return'<tr>'+cols.map(function(c){return'<td>'+(c.r?c.r(r):val(r,c))+'</td>';}).join('')+'</tr>';}).join('')+'</tbody>';el.innerHTML=h;el.querySelectorAll('th').forEach(function(th){th.onclick=function(){var i=+th.getAttribute('data-i');if(i===sortI)asc=!asc;else{sortI=i;asc=false;}render();};});if(opt.pagEl){var pe=document.getElementById(opt.pagEl);if(per&&pages>1){var pg='<span>'+data.length+' filas</span><button class="pg" data-p="prev">&lsaquo;</button>';for(var p=0;p<pages&&p<7;p++)pg+='<button class="pg'+(p===page?' on':'')+'" data-p="'+p+'">'+(p+1)+'</button>';pg+='<button class="pg" data-p="next">&rsaquo;</button>';pe.innerHTML=pg;pe.querySelectorAll('.pg').forEach(function(b){b.onclick=function(){var dd=b.getAttribute('data-p');if(dd==='prev')page=Math.max(0,page-1);else if(dd==='next')page=Math.min(pages-1,page+1);else page=+dd;render();};});}else pe.innerHTML='';}}
+  render();REDRAWS.push(render);return {setFilter:function(f){filter=f;page=0;render();}};}
+ // canales
+ var can=[{c:'Mercado Libre',rev:D.canal.ML.revenue,ord:D.canal.ML.ordenes,ads:D.canal.ML.ads,mg:D.canal.ML.margen_pct,tk:D.canal.ML.ticket},
+          {c:'Tiendanube',rev:D.canal.TN.revenue,ord:D.canal.TN.ordenes,ads:0,mg:D.canal.TN.margen_pct,tk:D.canal.TN.ticket}];
+ table('tCanales',[{t:'Canal',k:'c',r:function(r){var col=r.c[0]==='M'&&r.c[1]==='e'?'var(--ml)':'var(--mag2)';return'<span class="pill" style="background:rgba(236,72,153,.12);color:'+col+'">'+r.c+'</span>';}},{t:'Revenue',k:'rev',r:money('rev')},{t:'Órdenes',k:'ord'},{t:'Ad Spend',k:'ads',r:money('ads')},{t:'Margen',k:'mg',r:function(r){return'<span class="up">'+r.mg+'%</span>';}},{t:'Ticket',k:'tk',r:money('tk')}],can,{sort:1});
+ // ventas
+ var vt=table('tVentas',[{t:'Orden',k:'id'},{t:'Origen',k:'or'},{t:'Estado',k:'est',r:function(){return'<span class="pill p-paid">Pagado</span>';}},{t:'Fecha',k:'fch'},{t:'Total',k:'tot',r:money('tot')}],D.ventas,{per:8,pagEl:'vpag',filterKey:'id'});
+ document.getElementById('vf').oninput=function(){vt.setFilter(this.value);};
+ // top productos
+ function topcols(){return [{t:'SKU',k:'sku'},{t:'Producto',k:'nombre'},{t:'Revenue',k:'rev',r:money('rev')},{t:'Unid.',k:'un'},{t:'Costo',k:'costo',r:money('costo')},{t:'Margen',k:'margen',r:function(r){return r.margen==null?'—':'<span class="'+(r.margen<20?'dn':'up')+'">'+r.margen+'%</span>';}},{t:'Contribución',k:'contrib',r:money('contrib')}];}
+ table('tTopML',topcols(),D.top_ml,{sort:2}); table('tTopTN',topcols(),D.top_tn,{sort:2});
+ // campanas
+ table('tCamp',[{t:'Campaña',k:'camp'},{t:'Invertido',k:'spend',r:money('spend')},{t:'Diario',k:'daily',r:money('daily')},{t:'Presup./día',k:'budget',r:money('budget')},{t:'ACOS',k:'acos',r:function(r){return r.acos==null?'—':'<span class="'+(r.acos>30?'dn':'up')+'">'+r.acos+'%</span>';}}],D.camp,{sort:1});
+ // reposicion
+ table('tRepos',[{t:'SKU',k:'sku'},{t:'Producto',k:'nombre'},{t:'Stock',k:'stock'},{t:'Venta/día',k:'vd'},{t:'Cobertura',k:'cob',r:function(r){return'<span class="'+(r.cob<7?'dn':'')+'">'+r.cob+' d</span>';}},{t:'Prioridad',k:'sev',r:function(r){return r.sev==='urgente'?'<span class="pill p-canc">Urgente</span>':'<span class="pill p-pend">Pronto</span>';}}],D.repos,{sort:4});
+ // nav
+ var titles={dash:'Dashboard',gan:'Ganancia',ads:'Publicidad',prod:'Productos',inv:'Inventario',dec:'Decisiones'};
+ document.querySelectorAll('.navi[data-view]').forEach(function(n){n.onclick=function(){document.querySelectorAll('.navi').forEach(function(x){x.classList.remove('on');});n.classList.add('on');document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on');});var id=n.getAttribute('data-view');document.getElementById('v-'+id).classList.add('on');document.getElementById('vtitle').textContent=titles[id];document.getElementById('side').classList.remove('open');window.scrollTo(0,0);};});
+ document.querySelectorAll('.navi[data-soon]').forEach(function(n){n.onclick=function(){toast(n.textContent.trim()+' · próximamente');};});
+ document.getElementById('curChip').onclick=function(){cur=cur==='ARS'?'USD':'ARS';this.innerHTML=(cur==='USD'?'US$ USD':'$ ARS')+' &#9662;';paintMoney();REDRAWS.forEach(function(r){r();});toast('Moneda: '+cur);};
+ document.getElementById('dateChip').onclick=function(){toast('Período: últimos 60 días · datos en vivo');};
+ document.getElementById('hamb').onclick=function(){document.getElementById('side').classList.toggle('open');};
+ paintMoney();
+ if(typeof Chart!=='undefined'){Chart.defaults.color='#8b8b97';Chart.defaults.font.size=10;var gx={grid:{color:'rgba(38,38,48,.6)'},ticks:{color:'#8b8b97'}};
+  new Chart(document.getElementById('cCost'),{type:'doughnut',data:{labels:['Costo prod.','Comisiones','Publicidad','Envíos','Ganancia'],datasets:[{data:D.cost,backgroundColor:['#ef4444','#f59e0b','#EAB308','#7c3aed','#22c55e'],borderColor:'#15151b',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'right',labels:{color:'#ececf1',padding:8}}}}});
+  var rev=D.gan_dia.map(function(d){return d[1];}),gan=D.gan_dia.map(function(d){return d[2];}),lbl=D.gan_dia.map(function(d){return d[0].slice(8)+'/'+d[0].slice(5,7);}),main;
+  main=new Chart(document.getElementById('cMain'),{type:'line',data:{labels:lbl,datasets:[{label:'Revenue',data:rev,borderColor:'#EC4899',backgroundColor:'rgba(236,72,153,.12)',fill:true,tension:.35,pointRadius:2},{label:'Ganancia',data:gan,borderColor:'#22c55e',tension:.35,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:gx,y:Object.assign({ticks:{callback:function(v){return'$'+(v/1000).toFixed(0)+'k';}}},gx)}}});
+  document.querySelectorAll('.tg').forEach(function(tg){tg.onclick=function(){var i=+tg.getAttribute('data-ds'),mm=main.getDatasetMeta(i);mm.hidden=!mm.hidden;tg.classList.toggle('off');main.update();};});
+  new Chart(document.getElementById('cGanD'),{type:'bar',data:{labels:D.gan_dia.map(function(d){return d[0].slice(8);}),datasets:[{label:'Ganancia',data:D.gan_dia.map(function(d){return d[2];}),backgroundColor:'rgba(34,197,94,.6)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:gx,y:Object.assign({ticks:{callback:function(v){return'$'+(v/1000).toFixed(0)+'k';}}},gx)}}});
+  new Chart(document.getElementById('cGanS'),{type:'bar',data:{labels:D.gan_sem.map(function(d){return 'sem '+d[0].slice(5);}),datasets:[{label:'Ganancia',data:D.gan_sem.map(function(d){return d[2];}),backgroundColor:'rgba(236,72,153,.55)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:gx,y:Object.assign({ticks:{callback:function(v){return'$'+(v/1e6).toFixed(1)+'M';}}},gx)}}});
+  new Chart(document.getElementById('cGanM'),{type:'bar',data:{labels:D.gan_mes.map(function(d){return d[0];}),datasets:[{label:'Revenue',data:D.gan_mes.map(function(d){return d[1];}),backgroundColor:'rgba(234,179,8,.5)',borderRadius:4},{label:'Ganancia',data:D.gan_mes.map(function(d){return d[2];}),backgroundColor:'rgba(34,197,94,.7)',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#ececf1'}}},scales:{x:gx,y:Object.assign({ticks:{callback:function(v){return'$'+(v/1e6).toFixed(0)+'M';}}},gx)}}});
+ }
+})();
+</script></body></html>
