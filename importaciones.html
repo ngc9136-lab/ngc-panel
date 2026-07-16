@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang=es><head><meta charset=UTF-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
+<!DOCTYPE html><html lang=es><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1">
 <title>Importaciones · NGC</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel=stylesheet>
 <style>
@@ -7,197 +6,192 @@
 body{font-family:'Chakra Petch',sans-serif;background:radial-gradient(1000px 500px at 50% -10%,#16294a,#0a1526 60%);color:#eaf1fb;padding:22px 16px 60px;min-height:100vh}
 .wrap{max-width:1000px;margin:0 auto}
 h1{font-family:Orbitron;font-size:26px;font-weight:800;background:linear-gradient(180deg,#fff,#f0d488);-webkit-background-clip:text;background-clip:text;color:transparent}
-.subh{color:#9fb3d0;font-size:13px;margin:4px 0 20px}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.subh{color:#9fb3d0;font-size:13px;margin:4px 0 8px}
+.rate{display:inline-block;background:rgba(61,220,132,.12);border:1px solid #3ddc8455;color:#3ddc84;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:18px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
 .kpi{background:#132540;border:1px solid #24406b;border-radius:14px;padding:14px}
-.kpi .v{font-family:Orbitron;font-size:22px;font-weight:800;color:#f0d488}
+.kpi .v{font-family:Orbitron;font-size:20px;font-weight:800;color:#f0d488}
 .kpi .l{font-size:11px;color:#9fb3d0;text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
 .card{background:#122240;border:1px solid #24406b;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 8px 26px rgba(0,0,0,.35)}
 .chd{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.cn{font-family:Orbitron;font-weight:800;font-size:17px}
+.cn{font-family:Orbitron;font-weight:800;font-size:16px}
 .st{font-size:11px;font-weight:800;padding:5px 11px;border-radius:20px;white-space:nowrap}
 .cp{color:#9fb3d0;font-size:13px;margin:6px 0 14px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.grid div span{display:block;font-size:10.5px;color:#8ea3c0;text-transform:uppercase;letter-spacing:.3px}
-.grid div b{font-size:14px;color:#eaf1fb}
-.sub{margin-top:14px;background:#0e1c33;border-radius:10px;padding:10px 12px}
-.subt{font-size:11px;color:#c9a24b;font-weight:700;text-transform:uppercase;margin-bottom:6px}
-.sub table{width:100%;border-collapse:collapse;font-size:13px}
-.sub td{padding:3px 0;border-bottom:1px solid #1c3050;color:#c6d4ea}
-.nt{margin-top:12px;font-size:12px;color:#f0d488;background:rgba(240,212,136,.08);border-radius:8px;padding:8px 10px;line-height:1.4}
-.lbl{font-family:Orbitron;font-size:12px;letter-spacing:2px;color:#c9a24b;margin:26px 0 12px;text-transform:uppercase}
-@media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}
+.grid div span{display:block;font-size:10px;color:#8ea3c0;text-transform:uppercase}
+.grid div b{font-size:14px}
+.unit{margin-top:12px;background:rgba(240,212,136,.1);border:1px solid #c9a24b55;border-radius:10px;padding:10px 12px}
+.unit span{display:block;font-size:10px;color:#c9a24b;text-transform:uppercase;letter-spacing:.3px}
+.unit b{font-family:Orbitron;font-size:17px;color:#f0d488}
+.tl{margin-top:14px;background:#0e1c33;border-radius:10px;padding:12px 14px}
+.tlt{font-size:11px;color:#5ac8fa;font-weight:700;text-transform:uppercase;margin-bottom:10px}
+.tlrow{display:flex;gap:12px;position:relative;padding-bottom:12px}
+.tlrow:not(:last-child):before{content:'';position:absolute;left:5px;top:14px;bottom:0;width:2px;background:#24406b}
+.tldot{width:12px;height:12px;border-radius:50%;margin-top:3px;flex-shrink:0;z-index:1}
+.tlh{font-size:13px;font-weight:700}
+.tlf{color:#8ea3c0;font-size:11px;font-weight:600}
+.tld{font-size:12px;color:#9fb3d0;line-height:1.35}
+.nt{margin-top:12px;font-size:11.5px;color:#f0d488;background:rgba(240,212,136,.07);border-radius:8px;padding:8px 10px;line-height:1.4}
+.lbl{font-family:Orbitron;font-size:12px;letter-spacing:2px;color:#c9a24b;margin:24px 0 12px;text-transform:uppercase}
+@media(max-width:640px){.kpis{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,1fr)}}
 </style></head><body><div class=wrap>
 <h1>✈️ IMPORTACIONES · NGC</h1>
-<div class=subh>Seguimiento · costos · logística · reposición — actualizado 15/07/2026 18:00</div>
+<div class=subh>Seguimiento · timeline · costos a dólar oficial — 15/07/2026 18:30</div>
+<div class=rate>💵 Dólar oficial 15/07: compra $1.445 · venta $1.495</div>
 <div class=kpis>
- <div class=kpi><div class=v>9</div><div class=l>Cargas activas</div></div>
  <div class=kpi><div class=v>1</div><div class=l>En tránsito</div></div>
  <div class=kpi><div class=v>US$ 269.10</div><div class=l>FOB invertido</div></div>
  <div class=kpi><div class=v>$1.729.206</div><div class=l>Logística (ARS)</div></div>
 </div>
-<div class=lbl>◆ Cargas</div>
-
-    <div class="card">
-      <div class="chd"><div class="cn">Carga #1 (may)</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
-      <div class="cp">(por confirmar)</div>
-      <div class="grid">
-        <div><span>Cantidad</span><b>—</b></div>
-        <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>—</b></div>
-        <div><span>Pedido Alibaba</span><b>—</b></div>
-        <div><span>Guía</span><b>1Z0J5W578800449958</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>2026-05-27 → —</b></div>
-      </div>
-      
-      <div class="nt">📝 Import Guide 27/05 (Nicolas Baldonado, Shippar). Falta: producto, peso, FOB, factura.</div>
-    </div>
-    <div class="card">
-      <div class="chd"><div class="cn">Carga #2 (jun)</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
-      <div class="cp">(por confirmar)</div>
-      <div class="grid">
-        <div><span>Cantidad</span><b>—</b></div>
-        <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>$789.873</b></div>
-        <div><span>Pedido Alibaba</span><b>—</b></div>
-        <div><span>Guía</span><b>1Z0J5W578836749101</b></div>
-        <div><span>Lead time</span><b>15 días (pedido→entrega)</b></div>
-        <div><span>Fechas</span><b>2026-05-28 → 2026-06-12</b></div>
-      </div>
-      
-      <div class="nt">📝 Peso 17.5 kg. Import Guide 28/05, factura Shippar 12/06 $789.873,12, 17,5 kg. Falta: producto, cantidad, FOB.</div>
-    </div>
-    <div class="card">
-      <div class="chd"><div class="cn">Carga #3 (jul) - 23 kg</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
-      <div class="cp">Campera Softshell? (confirmar)</div>
-      <div class="grid">
-        <div><span>Cantidad</span><b>—</b></div>
-        <div><span>FOB origen</span><b>US$ 269.10</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>$939.332</b></div>
-        <div><span>Pedido Alibaba</span><b>306643867501029362</b></div>
-        <div><span>Guía</span><b>1Z0J5W578831902284</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>— → 2026-07-15</b></div>
-      </div>
-      
-      <div class="nt">📝 Peso 23.0 kg. Factura Shippar 15/07 $939.332,38 (pago MP 168936016038), 23,0 kg. OJO: 23 kg ~ 23 camperas -&gt; probablemente ESTA es la Campera (Alibaba 306643867, FOB USD 269,10), no el Shemagh. CONFIRMAR.</div>
-    </div>
-    <div class="card">
+<div class="card">
       <div class="chd"><div class="cn">Carga #4 (jul) - EN CURSO</div><span class="st" style="background:#5ac8fa22;color:#5ac8fa;border:1px solid #5ac8fa55">🚚 EN TRÁNSITO</span></div>
       <div class="cp">(por confirmar - ropa)</div>
       <div class="grid">
         <div><span>Cantidad</span><b>—</b></div>
         <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>—</b></div>
-        <div><span>Pedido Alibaba</span><b>—</b></div>
-        <div><span>Guía</span><b>1Z0J5W578802069301</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>2026-07-13 → —</b></div>
+        <div><span>Logística Shippar</span><b>—</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">1Z0J5W578802069301</b></div>
       </div>
       
+      <div class='tl'><div class='tlt'>📍 Línea de tiempo del envío</div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Import Guide emitida <span class='tlf'>13/07</span></div>
+          <div class='tld'>Shippar generó la guía UPS y envió instrucciones de envío al proveedor (China).</div></div></div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Coordinación de colecta <span class='tlf'>14/07</span></div>
+          <div class='tld'>Shippar pidió al proveedor despachar el paquete y confirmar retiro.</div></div></div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Proveedor confirma despacho <span class='tlf'>15/07</span></div>
+          <div class='tld'>Goollywood (Yiwu) confirmó que despacha el paquete.</div></div></div><div class='tlrow'><div class='tldot' style='background:#33465f'></div>
+          <div class='tlc'><div class='tlh'>Retiro UPS en origen <span class='tlf'>···</span></div>
+          <div class='tld'>Pendiente de scan de UPS en China.</div></div></div><div class='tlrow'><div class='tldot' style='background:#33465f'></div>
+          <div class='tlc'><div class='tlh'>En tránsito internacional <span class='tlf'>···</span></div>
+          <div class='tld'>Vuelo China → Argentina.</div></div></div><div class='tlrow'><div class='tldot' style='background:#33465f'></div>
+          <div class='tlc'><div class='tlh'>En aduana (Argentina) <span class='tlf'>···</span></div>
+          <div class='tld'>Despacho aduanero vía Shippar.</div></div></div><div class='tlrow'><div class='tldot' style='background:#33465f'></div>
+          <div class='tlc'><div class='tlh'>Entregado en Buenos Aires <span class='tlf'>···</span></div>
+          <div class='tld'>Entrega final.</div></div></div></div>
       <div class="nt">📝 Import Guide 13-14/07 (Baldonado, Shippar, cc proveedor Goollywood). Instrucciones de envio enviadas. Falta factura/peso/FOB. Es la carga mas nueva.</div>
-    </div>
-    <div class="card">
-      <div class="chd"><div class="cn">Shemagh - pedido Alibaba</div><span class="st" style="background:#9fb3d022;color:#9fb3d0;border:1px solid #9fb3d055">💳 PAGADO</span></div>
+    </div><div class="card">
+      <div class="chd"><div class="cn">Shemagh - pedido Alibaba</div><span class="st" style="background:#ffd76a22;color:#ffd76a;border:1px solid #ffd76a55">💳 PAGADO</span></div>
       <div class="cp">Panuelo Shemagh/Kufiya</div>
       <div class="grid">
         <div><span>Cantidad</span><b>—</b></div>
         <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>—</b></div>
-        <div><span>Pedido Alibaba</span><b>304131726501029362</b></div>
-        <div><span>Guía</span><b>—</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>— → —</b></div>
+        <div><span>Logística Shippar</span><b>—</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">—</b></div>
       </div>
       
+      
       <div class="nt">📝 Pedido Alibaba 304131726501029362 (el link que pasaste). Falta mapear a que guia/carga corresponde + cantidad/FOB/peso.</div>
-    </div>
-    <div class="card">
+    </div><div class="card">
+      <div class="chd"><div class="cn">Carga #1 (may)</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
+      <div class="cp">(por confirmar)</div>
+      <div class="grid">
+        <div><span>Cantidad</span><b>—</b></div>
+        <div><span>FOB origen</span><b>—</b></div>
+        <div><span>Logística Shippar</span><b>—</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">1Z0J5W578800449958</b></div>
+      </div>
+      
+      
+      <div class="nt">📝 Import Guide 27/05 (Nicolas Baldonado, Shippar). Falta: producto, peso, FOB, factura.</div>
+    </div><div class="card">
+      <div class="chd"><div class="cn">Carga #2 (jun)</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
+      <div class="cp">(por confirmar)</div>
+      <div class="grid">
+        <div><span>Cantidad</span><b>—</b></div>
+        <div><span>FOB origen</span><b>—</b></div>
+        <div><span>Logística Shippar</span><b>$789.873</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">1Z0J5W578836749101</b></div>
+      </div>
+      
+      
+      <div class="nt">📝 Peso 17.5 kg. Import Guide 28/05, factura Shippar 12/06 $789.873,12, 17,5 kg. Falta: producto, cantidad, FOB.</div>
+    </div><div class="card">
+      <div class="chd"><div class="cn">Carga #3 (jul) - 23 kg</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
+      <div class="cp">Campera Softshell? (confirmar)</div>
+      <div class="grid">
+        <div><span>Cantidad</span><b>23</b></div>
+        <div><span>FOB origen</span><b>US$ 269.10</b></div>
+        <div><span>Logística Shippar</span><b>$939.332</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">1Z0J5W578831902284</b></div>
+      </div>
+      <div class='unit'><span>Costo unitario (puesto, dólar oficial $1495)</span><b>$58.332 · US$ 39.0</b></div>
+      
+      <div class="nt">📝 Peso 23.0 kg. Factura Shippar 15/07 $939.332,38 (pago MP 168936016038), 23,0 kg. OJO: 23 kg ~ 23 camperas -&gt; probablemente ESTA es la Campera (Alibaba 306643867, FOB USD 269,10), no el Shemagh. CONFIRMAR. | COSTO (dólar oficial $1495): FOB ARS 402305 + logística 939332 = total 1341637 / 23u = $58332/u (US$ 39.0/u). Landed = 3,3x el FOB.</div>
+    </div><div class="card">
       <div class="chd"><div class="cn">Alibaba 295624535 (120 articulos)</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
       <div class="cp">(por confirmar)</div>
       <div class="grid">
         <div><span>Cantidad</span><b>—</b></div>
         <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>—</b></div>
-        <div><span>Pedido Alibaba</span><b>295624535001029362</b></div>
-        <div><span>Guía</span><b>—</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>— → —</b></div>
+        <div><span>Logística Shippar</span><b>—</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">—</b></div>
       </div>
       
+      <div class='tl'><div class='tlt'>📍 Línea de tiempo del envío</div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Pasó aduana <span class='tlf'>07/04</span></div>
+          <div class='tld'>Despacho aduanero OK, en camino a destino.</div></div></div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Entregado <span class='tlf'>07/04</span></div>
+          <div class='tld'>Carga finalizada.</div></div></div></div>
       <div class="nt">📝 pasó aduana 07/04/2026 — mapear a guia.</div>
-    </div>
-    <div class="card">
+    </div><div class="card">
       <div class="chd"><div class="cn">Alibaba 296389994 (11 articulos)</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
       <div class="cp">(por confirmar)</div>
       <div class="grid">
         <div><span>Cantidad</span><b>—</b></div>
         <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>—</b></div>
-        <div><span>Pedido Alibaba</span><b>296389994001029362</b></div>
-        <div><span>Guía</span><b>—</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>— → —</b></div>
+        <div><span>Logística Shippar</span><b>—</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">—</b></div>
       </div>
       
+      <div class='tl'><div class='tlt'>📍 Línea de tiempo del envío</div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Pasó aduana <span class='tlf'>09/04</span></div>
+          <div class='tld'>Despacho aduanero OK, en camino a destino.</div></div></div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Entregado <span class='tlf'>09/04</span></div>
+          <div class='tld'>Carga finalizada.</div></div></div></div>
       <div class="nt">📝 pasó aduana 09/04, delivery 28/05 — mapear a guia.</div>
-    </div>
-    <div class="card">
+    </div><div class="card">
       <div class="chd"><div class="cn">Alibaba 298025303 (3 articulos)</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
       <div class="cp">(por confirmar)</div>
       <div class="grid">
         <div><span>Cantidad</span><b>—</b></div>
         <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>—</b></div>
-        <div><span>Pedido Alibaba</span><b>298025303001029362</b></div>
-        <div><span>Guía</span><b>—</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>— → —</b></div>
+        <div><span>Logística Shippar</span><b>—</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">—</b></div>
       </div>
       
+      <div class='tl'><div class='tlt'>📍 Línea de tiempo del envío</div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Pasó aduana <span class='tlf'>06/05</span></div>
+          <div class='tld'>Despacho aduanero OK, en camino a destino.</div></div></div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Entregado <span class='tlf'>06/05</span></div>
+          <div class='tld'>Carga finalizada.</div></div></div></div>
       <div class="nt">📝 pasó aduana 06/05/2026 — mapear a guia.</div>
-    </div>
-    <div class="card">
+    </div><div class="card">
       <div class="chd"><div class="cn">Alibaba 302625803 (6 articulos)</div><span class="st" style="background:#3ddc8422;color:#3ddc84;border:1px solid #3ddc8455">✅ ENTREGADO</span></div>
       <div class="cp">(por confirmar)</div>
       <div class="grid">
         <div><span>Cantidad</span><b>—</b></div>
         <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>—</b></div>
-        <div><span>Pedido Alibaba</span><b>302625803001029362</b></div>
-        <div><span>Guía</span><b>—</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>— → —</b></div>
+        <div><span>Logística Shippar</span><b>—</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">—</b></div>
       </div>
       
+      <div class='tl'><div class='tlt'>📍 Línea de tiempo del envío</div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Pasó aduana <span class='tlf'>04/06</span></div>
+          <div class='tld'>Despacho aduanero OK, en camino a destino.</div></div></div><div class='tlrow'><div class='tldot' style='background:#3ddc84'></div>
+          <div class='tlc'><div class='tlh'>Entregado <span class='tlf'>04/06</span></div>
+          <div class='tld'>Carga finalizada.</div></div></div></div>
       <div class="nt">📝 pasó aduana 04/06/2026 — mapear a guia.</div>
-    </div>
-    <div class="card">
+    </div><div class="card">
       <div class="chd"><div class="cn">Alibaba 304560191 (-)</div><span class="st" style="background:#ff6b6b22;color:#ff6b6b;border:1px solid #ff6b6b55">✖ CANCELADO</span></div>
       <div class="cp">(por confirmar)</div>
       <div class="grid">
         <div><span>Cantidad</span><b>—</b></div>
         <div><span>FOB origen</span><b>—</b></div>
-        <div><span>Costo unit. FOB</span><b>—</b></div>
-        <div><span>Logística (Shippar)</span><b>—</b></div>
-        <div><span>Pedido Alibaba</span><b>304560191501029362</b></div>
-        <div><span>Guía</span><b>—</b></div>
-        <div><span>Lead time</span><b>—</b></div>
-        <div><span>Fechas</span><b>— → —</b></div>
+        <div><span>Logística Shippar</span><b>—</b></div>
+        <div><span>Guía UPS</span><b style="font-size:12px">—</b></div>
       </div>
+      
       
       <div class="nt">📝 CANCELADO 02/07/2026 — mapear a guia.</div>
     </div>
-<div class=lbl>◆ Pendiente de cargar</div>
-<div class=card><div class=nt>Para cerrar el costo unitario real y los tiempos de reposición necesito: (1) del Shemagh: cantidad, FOB USD, peso, variantes; (2) el tipo de cambio / lo que debitó la tarjeta por cada FOB (incluye impuesto PAÍS); (3) exportar tus chats de WhatsApp con proveedor/Shippar para registrar acuerdos de precio y tiempos. Una vez cargado, cada carga muestra: costo unitario en USD y ARS, lead time real, y alerta de cuándo re-pedir según el stock.</div></div>
 </div></body></html>
